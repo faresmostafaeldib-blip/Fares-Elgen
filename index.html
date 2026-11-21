@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fares Academy</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;font-family:Arial,sans-serif;
+ background:#0b1020;color:white;
+}
+header{
+ padding:25px;text-align:center;
+ background:#151e35;border-bottom:1px solid #293653;
+}
+header h1{color:#65a7ff;margin:5px}
+main{max-width:650px;margin:35px auto;padding:20px}
+.card{
+ background:#151e35;padding:25px;
+ border-radius:18px;border:1px solid #293653;
+}
+h2{color:#70adff}
+input,textarea{
+ width:100%;padding:14px;margin:12px 0;
+ border-radius:10px;border:1px solid #405174;
+ background:#0b1020;color:white;font-size:16px;
+}
+button{
+ width:100%;padding:15px;border:0;
+ border-radius:10px;background:#2878ee;
+ color:white;font-size:17px;cursor:pointer;
+}
+button:hover{background:#145bc2}
+#preview{max-width:100%;margin-top:15px;border-radius:10px}
+#result{
+ margin-top:20px;padding:15px;
+ background:#0b1020;border-radius:10px;
+ line-height:1.8;display:none;
+}
+footer{text-align:center;color:#9aa9c2;padding:25px}
+</style>
+</head>
+<body>
+<header>
+<h1>Fares Academy</h1>
+<p>منصتك التعليمية الذكية</p>
+</header>
+<main>
+<div class="card">
+<h2>مرحباً بك في منصتك التعليمية</h2>
+<p>اكتب سؤالك أو ارفع صورة السؤال للحصول على المساعدة.</p>
+
+<label>اكتب السؤال:</label>
+<textarea id="question" rows="4" placeholder="اكتب سؤالك هنا..."></textarea>
+
+<label>ارفع صورة السؤال:</label>
+<input type="file" id="photo" accept="image/*">
+<img id="preview" style="display:none">
+
+<button onclick="sendQuestion()">إرسال السؤال</button>
+
+<div id="result"></div>
+</div>
+</main>
+<footer>Fares Academy © 2026</footer>
+
+<script>
+const photo=document.getElementById('photo');
+photo.addEventListener('change',function(){
+ const file=this.files[0];
+ if(file){
+  const img=document.getElementById('preview');
+  img.src=URL.createObjectURL(file);
+  img.style.display='block';
+ }
+});
+
+function sendQuestion(){
+ const q=document.getElementById('question').value.trim();
+ const file=photo.files[0];
+ const result=document.getElementById('result');
+
+ if(!q && !file){
+  alert('اكتب السؤال أو ارفع صورة أولاً');
+  return;
+ }
+
+ result.style.display='block';
+ result.textContent='تم تجهيز سؤالك. سيتم ربط مساعد الذكاء الاصطناعي في الخطوة القادمة.';
+}
+</script>
+</body>
+</html>
