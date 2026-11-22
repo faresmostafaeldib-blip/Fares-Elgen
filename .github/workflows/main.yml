@@ -1,0 +1,26 @@
+async function solveWithAI(question) {
+  if (!question || !question.trim()) {
+    return "من فضلك اكتب السؤال أولاً";
+  }
+
+  try {
+    const response = await fetch("/api/solve", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ question })
+    });
+
+    if (!response.ok) {
+      throw new Error("حدث خطأ في الاتصال");
+    }
+
+    const data = await response.json();
+    return data.answer;
+
+  } catch (error) {
+    console.error(error);
+    return "تعذر الاتصال بالذكاء الاصطناعي، حاول مرة أخرى.";
+  }
+}
